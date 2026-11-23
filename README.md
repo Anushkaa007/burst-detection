@@ -1,48 +1,21 @@
-\# burst-detection
+# burst-detection
 
+![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)
 
+**Adaptive Log-ISI burst detection** and raw Multi-Electrode Array (MEA) trace visualization for extracellular electrophysiology recordings.
 
-Python toolkit for \*\*adaptive Log-ISI burst detection\*\* from multi-electrode array (MEA) spike trains and publication-ready visualization of raw MCS voltage traces.
+---
 
+## Method
 
+Instead of applying a fixed inter-spike interval (ISI) cutoff across heterogeneous channels, `burst-detection` derives an adaptive threshold per electrode from its firing statistics:
 
-\## Overview
-
-
-
-Rather than relying on a fixed inter-spike interval (ISI) cutoff, `burst\_detector.py` adapts the threshold to each electrode's firing statistics:
-
-
-
-1\. Computes the $\\log\_{10}(\\text{ISI})$ distribution of sorted spike times.
-
-2\. Smooths the histogram with a Gaussian kernel parameterized by Full Width at Half Maximum (FWHM).
-
-3\. Identifies the primary intra-burst peak ($\\le 100\\text{ ms}$) and the subsequent local minimum (valley) separating intra-burst from inter-burst intervals.
-
-4\. Groups consecutive spikes below that threshold into burst events and exports summary metrics + diagnostic plots.
-
-
-
-\## Installation
-
-
-
-```bash
-
-git clone \[https://github.com/Anushkaa007/burst-detection.git](https://github.com/Anushkaa007/burst-detection.git)
-
-cd burst-detection
-
-
-
-\# Core burst detection
-
-pip install -e .
-
-
-
-\# With raw MCS trace plotting (SpikeInterface) and dev tools
-
-pip install -e ".\[traces,dev]"
-
+```mermaid
+flowchart LR
+    A[Sorted Spike Times] --> B["log10(ISI) Histogram"]
+    B --> C[Gaussian Smoothing<br/>FWHM-parameterized]
+    C --> D[Detect Intra-Burst Peak<br/>&le; 100 ms & Valley]
+    D --> E[Group Consecutive Spikes<br/>ISI &le; Threshold]
+    E --> F[burst_events.csv +<br/>Diagnostic Plots]
