@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated paper below."
+type: software
+title: "burst-detection: Adaptive Log-ISI Burst Detection for MEA Recordings"
+authors:
+  - family-names: "Sarkar"
+    given-names: "Anushka"
+license: MIT
+repository-code: "https://github.com/Anushkaa007/burst-detection"
+keywords:
+  - electrophysiology
+  - multi-electrode array
+  - burst detection
+  - inter-spike interval
+preferred-citation:
+  type: article
+  title: "Spatiotemporal analysis of chick retinal waves: GABAergic regulation of wave dynamics"
+  authors:
+    - family-names: "Krishnan"
+      given-names: "Abhijith"
+    - family-names: "Deepak"
+      given-names: "C. S."
+    - family-names: "Sarkar"
+      given-names: "Anushka"
+    - family-names: "Narayan"
+      given-names: "K. S."
+  journal: "Experimental Eye Research"
+  volume: 260
+  start: 110593
+  year: 2025
+  doi: "10.1016/j.exer.2025.110593"

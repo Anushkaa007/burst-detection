@@ -1,10 +1,6 @@
 from __future__ import annotations
 
-from pathlib import Path
-
-import h5py
 import numpy as np
-import pandas as pd
 import pytest
 
 from burst_detection.burst_detector import (
@@ -12,7 +8,6 @@ from burst_detection.burst_detector import (
     extract_bursts,
     find_log_isi_threshold,
     fwhm_to_sigma,
-    run_pipeline,
 )
 
 BINS = np.arange(-4.0, 4.1, 0.1)
