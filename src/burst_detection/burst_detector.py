@@ -58,7 +58,7 @@ def find_log_isi_threshold(
     local_minima = argrelextrema(smooth_counts, np.less)[0]
     local_maxima = argrelextrema(smooth_counts, np.greater)[0]
 
-    if local_maxima.size == 0 or local_minima.size == 0:
+    if local_maxima.size < 2:
         return None, local_minima, local_maxima
 
     # Find the primary intra-burst peak below max_intraburst_isi_s
@@ -68,11 +68,14 @@ def find_log_isi_threshold(
         return None, local_minima, local_maxima
 
     first_peak = intra_peaks[np.argmax(smooth_counts[intra_peaks])]
-    valleys_after_peak = local_minima[local_minima > first_peak]
-    if valleys_after_peak.size == 0:
+    later_peaks = local_maxima[local_maxima > first_peak]
+    if later_peaks.size == 0:
         return None, local_minima, local_maxima
 
-    threshold_s = float(10.0 ** bin_centers[valleys_after_peak[0]])
+    # Take the lowest point between the intra-burst peak and the next peak
+    next_peak = later_peaks[0]
+    valley_idx = first_peak + int(np.argmin(smooth_counts[first_peak : next_peak + 1]))
+    threshold_s = float(10.0 ** bin_centers[valley_idx])
     return threshold_s, local_minima, local_maxima
 
 

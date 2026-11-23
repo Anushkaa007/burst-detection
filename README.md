@@ -1,20 +1,48 @@
-"""
-Burst Detection Script
-
-This script detects bursts in neural spike train data using inter-spike intervals (ISI).
-It processes data from an HDF5 file and generates plots for each electrode.
-
-Dependencies:
-- numpy
-- matplotlib
-- h5py
-- scipy
-- more_itertools
-
-Usage:
-Run the script in a Python environment with the required libraries installed.
-"""
+\# burst-detection
 
 
-Plot Script
-This Python script is designed to analyze and visualize neural spike train data recorded from electrodes. It begins by loading raw recording data from a specified file, allowing users to extract specific segments of the signal for closer examination. The script then generates clear and informative time series plots for selected channels, highlighting important time intervals and adding annotations to indicate significant events, such as voltage levels or light exposure. By organizing the code into functions, it ensures that the script is easy to read and maintain, making it accessible for researchers and developers interested in studying neural activity.
+
+Python toolkit for \*\*adaptive Log-ISI burst detection\*\* from multi-electrode array (MEA) spike trains and publication-ready visualization of raw MCS voltage traces.
+
+
+
+\## Overview
+
+
+
+Rather than relying on a fixed inter-spike interval (ISI) cutoff, `burst\_detector.py` adapts the threshold to each electrode's firing statistics:
+
+
+
+1\. Computes the $\\log\_{10}(\\text{ISI})$ distribution of sorted spike times.
+
+2\. Smooths the histogram with a Gaussian kernel parameterized by Full Width at Half Maximum (FWHM).
+
+3\. Identifies the primary intra-burst peak ($\\le 100\\text{ ms}$) and the subsequent local minimum (valley) separating intra-burst from inter-burst intervals.
+
+4\. Groups consecutive spikes below that threshold into burst events and exports summary metrics + diagnostic plots.
+
+
+
+\## Installation
+
+
+
+```bash
+
+git clone \[https://github.com/Anushkaa007/burst-detection.git](https://github.com/Anushkaa007/burst-detection.git)
+
+cd burst-detection
+
+
+
+\# Core burst detection
+
+pip install -e .
+
+
+
+\# With raw MCS trace plotting (SpikeInterface) and dev tools
+
+pip install -e ".\[traces,dev]"
+

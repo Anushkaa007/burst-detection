@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/burst_detection/__init__.py
+src/burst_detection/burst_detector.py
+src/burst_detection/plot_trace.py
+src/burst_detection.egg-info/PKG-INFO
+src/burst_detection.egg-info/SOURCES.txt
+src/burst_detection.egg-info/dependency_links.txt
+src/burst_detection.egg-info/entry_points.txt
+src/burst_detection.egg-info/requires.txt
+src/burst_detection.egg-info/top_level.txt
+tests/test_burst_detector.py

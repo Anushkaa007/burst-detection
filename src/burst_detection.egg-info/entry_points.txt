@@ -1,0 +1,3 @@
+[console_scripts]
+burst-detect = burst_detection.burst_detector:main
+plot-mea-trace = burst_detection.plot_trace:main

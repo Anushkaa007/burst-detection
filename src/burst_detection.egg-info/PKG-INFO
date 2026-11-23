@@ -1,0 +1,71 @@
+Metadata-Version: 2.4
+Name: burst-detection
+Version: 0.1.0
+Summary: Log-ISI burst detection and MEA raw trace visualization for extracellular electrophysiology.
+Author: Anushka Sarkar
+License: MIT
+Keywords: neuroscience,electrophysiology,MEA,burst-detection,spike-trains
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.24
+Requires-Dist: scipy>=1.10
+Requires-Dist: matplotlib>=3.7
+Requires-Dist: h5py>=3.8
+Requires-Dist: pandas>=2.0
+Requires-Dist: more-itertools>=10.0
+Provides-Extra: traces
+Requires-Dist: spikeinterface>=0.100; extra == "traces"
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: ruff>=0.4; extra == "dev"
+Dynamic: license-file
+
+\# burst-detection
+
+
+
+Python toolkit for \*\*adaptive Log-ISI burst detection\*\* from multi-electrode array (MEA) spike trains and publication-ready visualization of raw MCS voltage traces.
+
+
+
+\## Overview
+
+
+
+Rather than relying on a fixed inter-spike interval (ISI) cutoff, `burst\_detector.py` adapts the threshold to each electrode's firing statistics:
+
+
+
+1\. Computes the $\\log\_{10}(\\text{ISI})$ distribution of sorted spike times.
+
+2\. Smooths the histogram with a Gaussian kernel parameterized by Full Width at Half Maximum (FWHM).
+
+3\. Identifies the primary intra-burst peak ($\\le 100\\text{ ms}$) and the subsequent local minimum (valley) separating intra-burst from inter-burst intervals.
+
+4\. Groups consecutive spikes below that threshold into burst events and exports summary metrics + diagnostic plots.
+
+
+
+\## Installation
+
+
+
+```bash
+
+git clone \[https://github.com/Anushkaa007/burst-detection.git](https://github.com/Anushkaa007/burst-detection.git)
+
+cd burst-detection
+
+
+
+\# Core burst detection
+
+pip install -e .
+
+
+
+\# With raw MCS trace plotting (SpikeInterface) and dev tools
+
+pip install -e ".\[traces,dev]"
+

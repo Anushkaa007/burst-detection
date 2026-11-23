@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "burst-detection"
+version = "0.1.0"
+description = "Log-ISI burst detection and MEA raw trace visualization for extracellular electrophysiology."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Anushka Sarkar" }
+]
+keywords = ["neuroscience", "electrophysiology", "MEA", "burst-detection", "spike-trains"]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "matplotlib>=3.7",
+    "h5py>=3.8",
+    "pandas>=2.0",
+    "more-itertools>=10.0",
+]
+
+[project.optional-dependencies]
+traces = [
+    "spikeinterface>=0.100",
+]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.4",
+]
+
+[project.scripts]
+burst-detect = "burst_detection.burst_detector:main"
+plot-mea-trace = "burst_detection.plot_trace:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
