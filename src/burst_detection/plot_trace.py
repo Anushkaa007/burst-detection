@@ -27,8 +27,8 @@ def plot_trace(
     recording = se.read_mcsraw(file_path=str(file_path))
     fs = recording.get_sampling_frequency()
 
-    start_frame = int(round(fs * start_s))
-    end_frame = int(round(fs * stop_s))
+    start_frame = round(fs * start_s)
+    end_frame = round(fs * stop_s)
     channel_id = recording.channel_ids[channel_index]
 
     trace = recording.get_traces(

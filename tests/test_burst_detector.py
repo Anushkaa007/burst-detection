@@ -76,7 +76,7 @@ def test_unsorted_and_duplicate_spikes_handled_safely():
     rng = np.random.default_rng(7)
     rng.shuffle(messy_spikes)
 
-    bin_centers, smooth_counts = compute_smoothed_log_isi(messy_spikes, BINS, fwhm=6.0)
+    _, smooth_counts = compute_smoothed_log_isi(messy_spikes, BINS, fwhm=6.0)
     assert np.all(np.isfinite(smooth_counts))
     assert smooth_counts.sum() > 0
 
